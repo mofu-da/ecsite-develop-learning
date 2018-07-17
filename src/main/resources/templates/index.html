@@ -2,9 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>select miso shop</title>
 </head>
 <body>
-	<h1>Index.html</h1>
+	<h1>味噌セレクション</h1>
+		<div align="center">
+		<div style="width:60%;" >
+			<div align="right">
+				<form action="#" th:action="@{/cart/insert}" method="get">
+					<button type="submit" class="btn btn-primary btn-lg" style="margin-bottom:10px;">カート</button>
+				</form>
+				<form action="#" th:action="@{/employees/insert}" method="get">
+					<button type="submit" class="btn btn-primary btn-lg" style="margin-bottom:10px;">マイページ</button>
+				</form>
+			</div>
+			<table id="userTable" class="table table-striped table-bordered table-hover" >
+				<colgroup>
+					<col width="15%"/>
+					<col width="15%"/>
+					<col width="15%"/>
+					<col width="15%"/>
+					<col width="15%"/>
+				</colgroup>
+			    <thead>
+			        <tr>
+			            <th>一覧から探す</th>
+			            <th>名前から探す</th>
+			            <th>種類から探す</th>
+			            <th>産地から探す</th>
+			            <th>初めての方</th>
+			        </tr>
+			    </thead>
+			    <tbody th:each="employee : ${employees}">
+				  <tr>
+				  	<td th:text="${employee.id}" />
+				  	<td th:text="${employee.name}" />
+				  	<td th:text="${employee.position}" />
+				  	<td th:text="${employee.hiredate}" />
+				  	<td>
+				  		<form action="#" th:action="@{|/employees/update/${employee.id}|}" method="get">
+				  			<button type="submit" class="btn btn-success">編集</button>
+			  			</form>
+				  	</td>
+				  	<td>
+						<button type="submit" class="btn btn-danger delete" th:value="${employee.id}">削除</button>
+				  	</td>
+				  </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- JavaScript -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(document).on('click', ".delete", function() {
+				var val = $(this).attr("value");
+				console.log("val : " + val);
+				
+				var requestData = { "id": val };
+				  
+				var result = confirm("削除しますか？");
+				if(result) {
+					console.log("requestData : " + requestData.id);
+					$.ajax({
+						url : '/meibo/employees/delete',
+						type : 'POST',
+						data : requestData,
+						success : function(data, status, xhr) {
+							console.log("success");
+							location.reload();
+					　　　　},
+					　　　　error : function(XMLHttpRequest, status, errorThrown) {
+					　　　　　　console.log("fail");
+					　　　　}
+					});
+				}
+				  
+			});
+		});
+	</script>
 </body>
 </html>

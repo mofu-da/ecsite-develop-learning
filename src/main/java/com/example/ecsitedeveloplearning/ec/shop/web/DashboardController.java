@@ -13,7 +13,7 @@ import com.example.ecsitedeveloplearning.ec.shop.service.ShopService;
 
 @Controller
 @RequestMapping(path="/shop")
-public class ShopController {
+public class DashboardController {
 
 
 	/**
@@ -26,12 +26,12 @@ public class ShopController {
 	 * ======================== 実行メソッド ========================
 	 */
 
-	// top画面に全商品表示
-	@RequestMapping(value = "/top", method = RequestMethod.GET)
+	// dashboard画面に全商品表示
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public ModelAndView viewEmployees() {
 		List<Product> products = shopService.findAll();
 		System.out.println("test");
-		ModelAndView mv = new ModelAndView("shop/top");
+		ModelAndView mv = new ModelAndView("shop/dashboard");
 		mv.addObject("products", products);
 		return mv;
 	}

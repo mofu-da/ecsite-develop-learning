@@ -19,6 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "products")
 public class Product {
+	//test
 	
 	@Id
 	@Column(name = "id")

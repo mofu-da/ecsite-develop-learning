@@ -20,5 +20,13 @@ public class AccountController {
 		System.out.println("viewLogin");
 		return "account/login";
 	}
+	
+	@GetMapping("/findAll")
+	public String getAccounts() {
+		List<Account> findAll = accountService.findAll();
+		System.out.println("findAll :" + findAll);
+		System.out.println("viewLogin");
+		return "account/login";
+	}
 
 }

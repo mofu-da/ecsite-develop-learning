@@ -19,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "products")
 public class Product {
-	//test
+	//商品データ
 	
 	@Id
 	@Column(name = "id")
